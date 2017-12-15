@@ -1,0 +1,25 @@
+FROM ubuntu:xenial
+
+
+ENV HOME /galactrum
+
+ENV USER_ID ${USER_ID:-1000}
+ENV GROUP_ID ${GROUP_ID:-1000}
+
+RUN groupadd -g ${GROUP_ID} galactrum \
+        && useradd -u ${USER_ID} -g galactrum -s /bin/bash -m -d /galactrum galactrum
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  wget git net-tools
+RUN wget  --no-check-certificate https://github.com/galactrum/galactrum/releases/download/v1.1.2/galactrum-1.1.2-linux64.tar.gz
+RUN tar -xvzf galactrum-1.1.2-linux64.tar.gz
+RUN mv galactrum-1.1.2/bin/* /usr/local/bin/
+ENV PATH="/usr/local/bin/:${PATH}"
+
+VOLUME ["/galactrum"]
+
+RUN ln -s /galactrum/.galactrum /root/.galactrum
+
+#RUN /usr/local/bin/galactrumd -printtoconsole
+EXPOSE 6269 6270
+CMD galactrumd -printtoconsole ; sleep infinity
