@@ -1,0 +1,25 @@
+FROM ubuntu:xenial
+
+
+ENV HOME /dogecoin
+
+ENV USER_ID ${USER_ID:-1000}
+ENV GROUP_ID ${GROUP_ID:-1000}
+
+RUN groupadd -g ${GROUP_ID} dogecoin \
+        && useradd -u ${USER_ID} -g dogecoin -s /bin/bash -m -d /dogecoin dogecoin
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  wget git net-tools
+RUN wget  --no-check-certificate https://github.com/dogecoin/dogecoin/releases/download/v1.10.0/dogecoin-1.10.0-linux64.tar.gz
+RUN tar -xvzf dogecoin-1.10.0-linux64.tar.gz
+RUN mv dogecoin-1.10.0/bin/* /usr/local/bin/
+ENV PATH="/usr/local/bin/:${PATH}"
+
+VOLUME ["/dogecoin"]
+
+RUN ln -s /dogecoin/.dogecoin /root/.dogecoin
+
+#RUN /usr/local/bin/dogecoind -printtoconsole
+EXPOSE 22555 22556
+CMD dogecoind -printtoconsole ; sleep infinity
