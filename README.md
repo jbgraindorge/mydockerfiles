@@ -2,7 +2,7 @@
 
 dockerfiles for several cryptocurrencies
 
-* For litecoin I use [uphold/litecoind](https://github.com/Raboo/monero-docker)
+* For litecoin I use [uphold/litecoind](https://github.com/uphold/docker-litecoin-core)
 * For monero I use [raboo/monero](https://github.com/Raboo/monero-docker)
 
 For NOMP you could use canercandan/nomp
