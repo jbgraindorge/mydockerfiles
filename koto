@@ -18,6 +18,11 @@ RUN cd /root && git clone https://github.com/koto-dev/koto.git \
   && cp /root/koto/src/kotod /usr/local/bin/ \
   && cp /root/koto/src/koto-cli /usr/local/bin/ \
   && cp /root/koto/src/koto-tx /usr/local/bin
+RUN cd /tmp/ && GIT_SSL_NO_VERIFY=true git clone https://github.com/tpruvot/yiimp.git \
+  && cd /tmp/yiimp/blocknotify \
+  && make \
+  && cp blocknotify /usr/local/bin/ \
+  && cp blocknotify /bin/
 ENV PATH="/usr/local/bin/:${PATH}"
 
 VOLUME ["/koto"]
