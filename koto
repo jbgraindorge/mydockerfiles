@@ -15,6 +15,7 @@ RUN cd /root && git clone https://github.com/koto-dev/koto.git \
   && cd koto/zcutil \
   && /bin/bash fetch-params.sh \
   && /bin/bash build.sh --disable-rust -j$(nproc) \
+  && strip /root/koto/src/kotod \
   && cp /root/koto/src/kotod /usr/local/bin/ \
   && cp /root/koto/src/koto-cli /usr/local/bin/ \
   && cp /root/koto/src/koto-tx /usr/local/bin
