@@ -20,3 +20,7 @@ docker build -t galactrum .
 mkdir /data/galactrum
 docker run -v /data/galactrum:/galactrum -d --name galactrum galactrum
 ```
+
+BE CAREFULL
+
+I (sur)charge my containers with blocknotify from [tpruvot/yiimp](https://github.com/tpruvot/yiimp) , simply help yourself if you don't want it, juste delete the last RUN in dockerfile
